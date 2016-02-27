@@ -1,6 +1,7 @@
 package lwtech.itad230.location;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -16,6 +17,11 @@ import com.google.android.gms.location.LocationListener;
 import com.google.android.gms.location.LocationRequest;
 import com.google.android.gms.location.LocationServices;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.text.DateFormat;
 import java.util.Date;
 
@@ -87,5 +93,38 @@ public class MainActivity extends AppCompatActivity {
         }
         TextView tv = (TextView) findViewById(R.id.locations);
         tv.setText(str);
+
+        //Tom I tried to get the location to output to a file. However after noticing my file
+        //size increasing but still no file. I did some research and apparently, output to text
+        //gets sent to the Data file, which unless I rooted my phone I couldn't gain access to.
+        //I even tried making my own folder, but that gets thrown in Data too
+
+       /* File temp = File.createTempFile("Location",".tmp");
+            String absolutePath = temp.getAbsolutePath();
+            Toast.makeText(getBaseContext(), "File Path: " + absolutePath, Toast.LENGTH_LONG).show();
+            Pulls up the location of where the file goes, but cant gain access to it...
+
+
+        FileOutputStream outputStream;
+        try {
+            outputStream = openFileOutput("LocationUpdate.txt", Context.MODE_WORLD_READABLE);
+            outputStream.write(tv.getText().toString().getBytes());
+            outputStream.close();
+
+            FileInputStream in = openFileInput("LocationUpdate.txt");
+            InputStreamReader inputStreamReader = new InputStreamReader(in);
+            BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                sb.append(line);
+            }
+            inputStreamReader.close();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    */
+
     }
 }
